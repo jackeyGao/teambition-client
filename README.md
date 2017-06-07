@@ -6,7 +6,7 @@ a simple client of teambition API for python
 ## Installation
 
 ```bash
-pip install teambition-client
+pip install git+https://github.com/jackeyGao/teambition-client
 ```
 
 ## QuickStart
