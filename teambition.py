@@ -108,6 +108,11 @@ class Teambition(requests.Session):
         )
         return resp.json()["access_token"]
 
+    def _closes_all_adapters(self):
+        """Closes all adapters and as such the session"""
+        for v in self.adapters.values():
+            v.close()
+
     def request(self, method, path, *args, **kwargs):
         """
         request method
@@ -120,6 +125,7 @@ class Teambition(requests.Session):
         resp.raise_for_status()
 
         # Teambition API is RESTful .
-        self.close()
+        # Don't keep-alive. So closes all adapters.
+        self._closes_all_adapters()
 
         return resp.json()
